@@ -52,7 +52,7 @@ AboutTab:CreateParagraph({
 
 AboutTab:CreateSection("Links")
 
-local list = loadstring(game:HttpGet("https://gist.githubusercontent.com/BROTHAISHACKIER/d6b1a5e877631cee4d77fb42a8b7c0cc/raw"))()
+local list = loadstring(game:HttpGet("https://raw.githubusercontent.com/BROTHAISHACKIER/BROTHAISHACKIER-HUB/refs/heads/main/Hub/list.lua"))()
 
 for i, v in pairs(list.scripts) do
   UniversalTab:CreateButton({
