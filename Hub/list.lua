@@ -1,6 +1,6 @@
 return {
   scripts = {
-    ["FE Flex Your FPS"] = "https://gist.githubusercontent.com/BROTHAISHACKIER/1ac301a4a4119a6ff50b87544c17351d/raw",
+    ["FE Flex Your FPS"] = "https://raw.githubusercontent.com/BROTHAISHACKIER/BROTHAISHACKIER-HUB/refs/heads/main/FE%20Flex%20Your%20FPS.lua",
   },
   profiles = {
     ["ScriptBlox"] = "https://scriptblox.com/u/BROTHAISHACKIER",
