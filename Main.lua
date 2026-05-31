@@ -6,17 +6,45 @@ function hub:Run(id)
 	if game:GetService("CoreGui"):FindFirstChild("BIH KS") then
 		game:GetService("CoreGui"):FindFirstChild("BIH KS"):Destroy()
 	end
+	local request = (syn and syn.request) or (fluxus and fluxus.request) or (http and http.request) or http_request or request
+	local verifyEvent = Instance.new("BindableEvent")
+	local run
+	makefolder(".BIH")
+	local folder = ".BIH/"
+	if isfile(folder.."key") then
+		local HttpService = game:GetService("HttpService")
+		local url = "https://bkeys.pages.dev/api"
+
+		local body = {
+			key = readfile(folder.."key"),
+			id = id
+		}
+		
+		local response = request({
+			Url = url,
+			Method = "POST",
+			Headers = {
+				["Content-Type"] = "application/json"
+			},
+			Body = HttpService:JSONEncode(body)
+		})
+		local data = HttpService:JSONDecode(response.Body)
+		if data.success then
+			run = data.code
+			verifyEvent:Fire()
+			return loadstring(run)
+		end
+	end
 	local function discord(Url)
 		local HttpService = game:GetService("HttpService")
 		if not useStudio and not secureMode then
-			local requestFunc = (syn and syn.request) or (fluxus and fluxus.request) or (http and http.request) or http_request or request
-			if requestFunc then
+			if request then
 				local inviteCode = tostring(Url)
 					:gsub("https://discord%.gg/", "")
 					:gsub("http://discord%.gg/", "")
 					:gsub("discord%.gg/", "")
 				local s, e = pcall(function()
-					requestFunc({
+					request({
 						Url = 'http://127.0.0.1:6463/rpc?v=1',
 						Method = 'POST',
 						Headers = {
@@ -189,8 +217,6 @@ function hub:Run(id)
 	button.BackgroundColor3 = Color3.new(0.117647, 0.588235, 1)
 	Instance.new("UICorner", button).CornerRadius = UDim.new(0.2, 0)
 
-	local verifyEvent = Instance.new("BindableEvent")
-	local run
 	button.Activated:Connect(function()
 		local tween1 = TweenService:Create(
 			button,
@@ -227,6 +253,7 @@ function hub:Run(id)
 			key = key.Text,
 			id = id
 		}
+		writefile(folder.."key", key.Text)
 
 		local response = request({
 			Url = url,
