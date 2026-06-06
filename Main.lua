@@ -17,7 +17,7 @@ function hub:Run(id)
 
 		local body = {
 			key = readfile(folder.."key"),
-			id = id
+			file = id
 		}
 		
 		local response = request({
@@ -251,7 +251,7 @@ function hub:Run(id)
 
 		local body = {
 			key = key.Text,
-			id = id
+			file = id
 		}
 		writefile(folder.."key", key.Text)
 
