@@ -1,4 +1,5 @@
 local hub = {}
+local super = getfenv and getfenv(0) or _G
 
 function hub:Run(id)
 	local TweenService = game:GetService("TweenService")
@@ -32,7 +33,7 @@ function hub:Run(id)
 		if data.success then
 			run = data.code
 			verifyEvent:Fire()
-			return loadstring(run)
+			return (debug.getinfo(super["loadstring"])["what"] == "C") and debug.getinfo(super["loadstring"])["func"](run)
 		end
 	end
 	local function discord(Url)
@@ -284,7 +285,7 @@ function hub:Run(id)
 		Text = "Verified!",
 		Duration = 5
 	})
-	return loadstring(run)
+	return (debug.getinfo(super["loadstring"])["what"] == "C") and debug.getinfo(super["loadstring"])["func"](run)
 end
 
 return hub
